@@ -1,0 +1,93 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Contacts API",
+        "version": "1.0.0",
+        "description": "API for managing contacts"
+    },
+    "servers": [
+        {
+            "url": "https://contacts-api-d727.onrender.com",
+            "description": "Live API on Render"
+        }
+    ],
+    "paths": {
+        "/contacts": {
+            "get": {
+                "summary": "Get all contacts",
+                "responses": {
+                    "200": {
+                        "description": "Returns all contacts"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add a new contact",
+                "responses": {
+                    "201": {
+                        "description": "Contact created"
+                    }
+                }
+            }
+        },
+        "/contacts/{id}": {
+            "get": {
+                "summary": "Get contact by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contact found"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update contact by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contact updated"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete contact by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Contact deleted"
+                    }
+                }
+            }
+        }
+    }
+}
