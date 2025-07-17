@@ -4,6 +4,48 @@ const Contact = require('../models/contact');
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Contact:
+ *       type: object
+ *       required:
+ *         - firstName
+ *         - lastName
+ *         - email
+ *         - favoriteColor
+ *         - birthday
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The auto-generated id of the contact
+ *         firstName:
+ *           type: string
+ *           description: First name of the contact
+ *         lastName:
+ *           type: string
+ *           description: Last name of the contact
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: Email address of the contact
+ *         favoriteColor:
+ *           type: string
+ *           description: Favorite color of the contact
+ *         birthday:
+ *           type: string
+ *           format: date
+ *           description: Birthday of the contact
+ *       example:
+ *         _id: "60c72b2f9b1d4c3f88f48a1d"
+ *         firstName: "John"
+ *         lastName: "Doe"
+ *         email: "john.doe@example.com"
+ *         favoriteColor: "Blue"
+ *         birthday: "1990-01-01"
+ */
+
+/**
+ * @swagger
  * tags:
  *   name: Contacts
  *   description: API for managing contacts
@@ -84,8 +126,17 @@ router.get('/:id', async (req, res) => {
  *     responses:
  *       201:
  *         description: Contact created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 id:
+ *                   type: string
  *       400:
- *         description: Bad request
+ *         description: Bad request. Missing required fields.
  */
 router.post('/', async (req, res) => {
     try {
@@ -132,6 +183,15 @@ router.post('/', async (req, res) => {
  *     responses:
  *       200:
  *         description: Contact updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 updatedContact:
+ *                   $ref: '#/components/schemas/Contact'
  *       404:
  *         description: Contact not found
  */
@@ -168,6 +228,13 @@ router.put('/:id', async (req, res) => {
  *     responses:
  *       200:
  *         description: Contact deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  *       404:
  *         description: Contact not found
  */
